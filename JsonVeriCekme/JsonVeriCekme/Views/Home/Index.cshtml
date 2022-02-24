@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Json Veri Çekme";
+}
+
+
+<div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <table>
+        <tr>
+            <th style="width: 55%">Ürün Adı</th>
+            <th style="width: 35%">Mevcut Stok</th>
+            <th style="width: 35%">Ücreti</th>
+        </tr>
+        <tr>
+            <td id="urunAdi"></td>
+            <td id="stock"></td>
+            <td id="price"></td>
+        </tr>
+    </table>
+
+
+</div>
+
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 16px;
+    }
+
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+  
+</style>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+
+    $(document).ready(function() {
+        $.getJSON("/Home/GetProducts",null,function(data){
+            $.each(data, function(i, item){
+                $("#urunAdi").append("<li>"+ item.ProductName+"</li>");
+                $("#stock").append("<li>"+ item.UnitsInStock+"</li>");
+                $("#price").append("<li>"+ item.UnitPrice+"</li>");
+            })
+
+
+        })
+
+        
+    })
+
+
+</script>
+
+
+
+
+
+
+
+
